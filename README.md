@@ -1,5 +1,5 @@
 # 💞 AI Love Match: Career Chemistry Auditor
-[Live Demo Link](https://your-custom-url.streamlit.app)
+[Live Demo Link](https://ai-love-match.streamlit.app/)
 
 An interactive AI-powered Resume Matcher that uses **emotional feedback** to visualize your career compatibility.
 
