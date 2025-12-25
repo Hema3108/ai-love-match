@@ -5,187 +5,197 @@ from PyPDF2 import PdfReader
 from dotenv import load_dotenv
 import re
 
-# 1. PAGE CONFIG
-st.set_page_config(page_title="AI Love Match", page_icon="💖", layout="wide")
+# 1. PAGE CONFIGURATION
+st.set_page_config(page_title="CareerSynergy AI Audit", page_icon="⚖️", layout="wide")
 load_dotenv()
 
-# 2. ADVANCED UI CSS
+# 2. PROFESSIONAL CORPORATE UI (CSS)
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
     html, body, [data-testid="stAppViewContainer"] {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 100%) !important;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc !important;
     }
 
-    /* Main Container Glassmorphism (soft pastel pink variant) */
-    .glass-card {
-        background: rgba(252, 238, 245, 0.95); /* very light pink */
-        backdrop-filter: blur(10px);
-        border-radius: 18px;
-        padding: 18px 28px;
-        border: 1px solid rgba(123, 31, 162, 0.12); /* soft purple border */
-        box-shadow: 0 8px 18px rgba(123, 31, 162, 0.06);
-        margin: 0 0 18px 0;
-    }
-    /* Remove extra top spacing for the first glass card below the header */
-    .glass-card:first-of-type { margin-top: 0 !important; }
-
-    /* Floating Heart Particles */
-    @keyframes float {
-        0% { transform: translateY(0) rotate(0); opacity: 0; }
-        50% { opacity: 0.8; }
-        100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
-    .heart {
-        position: fixed;
-        color: #ff80ab;
-        font-size: 20px;
-        pointer-events: none;
-        z-index: 0;
-        animation: float 10s infinite linear;
+    /* Professional Header */
+    .header-box {
+        background-color: #0f172a;
+        padding: 40px 20px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
 
-    /* Circular Progress Bar */
-    .circle-box {
-        position: relative;
-        width: 180px;
-        height: 180px;
-        margin: 20px auto;
+    /* Dashboard Cards */
+    .dashboard-card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    /* Metric Circle */
+    .metric-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 6px solid #3b82f6;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #fffdfa; /* very light warm white */
-        border-radius: 50%;
-        box-shadow: 0 8px 18px rgba(123, 31, 162, 0.06);
-        border: 10px solid rgba(255,64,129,0.12); /* soft pink ring */
+        margin: 20px auto;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1e293b;
+        background: #f1f5f9;
     }
-    .score-text { font-size: 3rem; font-weight: 800; color: #7b1fa2; }
 
-    /* Result Skill Cards */
-    .skill-card {
-        padding: 16px;
-        border-radius: 12px;
-        background: #ffffff; /* clean white for contrast */
-        border-bottom: 4px solid rgba(0,0,0,0.06);
-        margin-bottom: 14px;
-        box-shadow: 0 5px 12px rgba(0,0,0,0.03);
-        color: #333;
+    /* Analysis Badges */
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+        margin: 4px;
     }
-    /* Input boxes for uploader and job description */
-    .input-card {
-        padding: 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(123,31,162,0.08);
-        box-shadow: 0 6px 12px rgba(123,31,162,0.03);
-    }
-    .input-left { background: rgba(255,246,250,0.95); /* very pale pink */ }
-    .input-right { background: rgba(237,245,255,0.95); /* very pale blue */ }
-    .input-card .stButton>button { margin-top: 8px; }
-    .match-green { border-color: #4caf50; }
-    .match-yellow { border-color: #ffeb3b; }
-    .match-red { border-color: #f44336; }
+    .badge-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .badge-danger { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
 
-    /* Find My Match Button */
+    /* Button Styling */
     .stButton>button {
-        background: linear-gradient(90deg, #7b1fa2, #ff4081) !important;
+        background-color: #2563eb !important;
         color: white !important;
-        border-radius: 50px !important;
-        padding: 15px 50px !important;
-        font-size: 1.5rem !important;
-        font-weight: 800 !important;
+        border-radius: 8px !important;
+        padding: 18px 0 !important;
+        font-size: 1.05rem !important;
+        min-height: 56px !important;
+        min-width: 520px !important;
+        width: auto !important;
+        font-weight: 700 !important;
         border: none !important;
-        box-shadow: 0 10px 20px rgba(123, 31, 162, 0.3) !important;
-        transition: all 0.3s ease !important;
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        transition: background 0.2s, transform 0.08s;
     }
-    .stButton>button:hover { transform: scale(1.05); box-shadow: 0 15px 25px rgba(123, 31, 162, 0.5) !important; }
-
-    h1, h2, h3 { color: #333; text-align: center; }
+    .stButton>button:hover {
+        background-color: #1d4ed8 !important;
+        transform: translateY(-1px);
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. SIDEBAR KEY LOGIC
+# 3. SIDEBAR CONFIGURATION
 with st.sidebar:
-    st.title("💖 Settings")
-    user_key = st.text_input("OpenRouter Key", type="password")
+    st.image("https://cdn-icons-png.flaticon.com/512/3850/3850285.png", width=80)
+    st.title("System Controls")
+    user_key = st.text_input("API Authorization Key", type="password")
     final_api_key = user_key if user_key else os.getenv("OPENROUTER_API_KEY")
+    st.divider()
+    st.markdown("### Audit Parameters")
+    st.caption("Engine: Llama-3.3-70B")
+    st.caption("Methodology: Semantic Gap Analysis")
 
-# 4. BACKGROUND DECORATION (Hearts)
-for i in range(10):
-    st.markdown(f'<div class="heart" style="left:{i*10}%; bottom:-10%; animation-delay:{i*0.5}s;">❤️</div>', unsafe_allow_html=True)
+# 4. MAIN INTERFACE HEADER
+st.markdown("""
+    <div class="header-box">
+        <h1 style="margin:0; color:white; font-size: 2.5rem;">CareerSynergy AI Audit</h1>
+        <p style="opacity:0.8; font-size: 1.1rem; margin-top:10px;">Automated Semantic Alignment & Technical Compatibility Verification</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# 5. HEADER
-# Tweak header margins to remove the extra empty space below the title
-st.markdown(
-    '<div style="text-align:center; margin-bottom:0;">'
-    '<h1 style="margin:0; padding:0;">💞 AI Love Match</h1>'
-    '<p style="text-align:center; margin:4px 0 0 0;">Find your dream job soulmate</p>'
-    '</div>',
-    unsafe_allow_html=True
-)
+# 5. INPUT SECTIONS
+col1, col2 = st.columns(2)
 
-# 6. INPUT CARDS
-# Add a small intro inside the first glass card so it doesn't appear empty
-st.markdown(
-    '<div class="glass-card">'
-    '<p style="text-align:center; margin:0 0 12px 0; color:#555;">Tell us about yourself — upload your resume or paste a job description to get started.</p>'
-    , unsafe_allow_html=True
-)
-c1, c2 = st.columns(2)
-with c1:
-    st.subheader("Your Story")
-    uploaded_file = st.file_uploader("Upload resume (PDF/DOC)", type="pdf", label_visibility="collapsed")
-with c2:
-    st.subheader("Their Dream Candidate")
-    job_desc = st.text_area("Paste job description here...", height=120, label_visibility="collapsed")
-st.markdown('</div>', unsafe_allow_html=True)
+with col1:
+    st.subheader("Candidate Profile")
+    uploaded_file = st.file_uploader("Upload technical resume for parsing (PDF)...", type="pdf", label_visibility="collapsed")
+    if uploaded_file:
+        st.info("Document successfully staged for audit.")
 
-# 7. ANALYZE ACTION
-st.markdown('<div style="text-align:center;">', unsafe_allow_html=True)
-analyze_btn = st.button("Find My Match!")
-st.markdown('</div>', unsafe_allow_html=True)
+with col2:
+    st.subheader("Target Specification")
+    job_desc = st.text_area("Provide the job description or technical requirements here...", height=128, label_visibility="collapsed")
+    if job_desc:
+        st.caption("Requirement parameters received.")
 
-# 8. AI LOGIC
-def get_ai_audit(resume_text, job_text, api_key):
-    prompt = f"Analyze the match between this Resume: {resume_text} and Job: {job_text}. Give a Match Score/100, Matching Skills, Missing Skills, and a short Verdict."
-    try:
-        res = requests.post(
-            url="https://openrouter.ai/api/v1/chat/completions",
-            headers={"Authorization": f"Bearer {api_key}"},
-            json={"model": "meta-llama/llama-3.3-70b-instruct:free", "messages": [{"role": "user", "content": prompt}]}
-        )
-        return res.json()['choices'][0]['message']['content']
-    except: return "Score: 50%"
+# 6. EXECUTION TRIGGER
+# Changed the button text to a more professional action
+if st.button("Check Match"):
+    if not final_api_key:
+        st.error("Authentication Error: API Key required.")
+    elif uploaded_file and job_desc:
+        with st.spinner("Executing neural semantic analysis..."):
+            # Extract PDF Text
+            reader = PdfReader(uploaded_file)
+            resume_text = "".join([p.extract_text() for p in reader.pages])
+            
+            # AI API Call
+            prompt = f"""
+            Analyze the following resume against the job description for a professional audit.
+            Resume: {resume_text[:2000]}
+            Job Description: {job_desc[:2000]}
+            
+            Format response as:
+            SCORE: [Integer]
+            MATCHING: [3 skills]
+            MISSING: [3 skills]
+            VERDICT: [1 sentence executive summary]
+            """
+            
+            try:
+                res = requests.post(
+                    url="https://openrouter.ai/api/v1/chat/completions",
+                    headers={"Authorization": f"Bearer {final_api_key}"},
+                    json={"model": "meta-llama/llama-3.3-70b-instruct:free", "messages": [{"role": "user", "content": prompt}]}
+                )
+                output = res.json()['choices'][0]['message']['content']
+                
+                # Parsing Results
+                score = re.search(r"SCORE:\s*(\d+)", output).group(1) if re.search(r"SCORE:\s*(\d+)", output) else "0"
+                matching = re.search(r"MATCHING:\s*(.*)", output).group(1) if re.search(r"MATCHING:\s*(.*)", output) else "Unknown"
+                missing = re.search(r"MISSING:\s*(.*)", output).group(1) if re.search(r"MISSING:\s*(.*)", output) else "Unknown"
+                verdict = re.search(r"VERDICT:\s*(.*)", output).group(1) if re.search(r"VERDICT:\s*(.*)", output) else "Audit successful."
 
-# 9. RESULTS DASHBOARD
-if analyze_btn and uploaded_file and job_desc:
-    with st.spinner("Checking compatibility..."):
-        reader = PdfReader(uploaded_file)
-        text = "".join([p.extract_text() for p in reader.pages])
-        raw_result = get_ai_audit(text, job_desc, final_api_key)
-        
-        # UI Simulation based on score
-        score_val = 85 # Simulated score for demo
-        
-        st.markdown(f"""
-            <div class="glass-card" style="text-align:center;">
-                <h2 style="color:#ff4081;">PERFECT MATCH! 💖</h2>
-                <p>The recruiter will love this!</p>
-                <div class="circle-box">
-                    <div class="score-text">{score_val}%</div>
-                </div>
-            </div>
-        """, unsafe_allow_html=True)
-
-        # Bottom Grid (Skills)
-        st.markdown("### Match Details")
-        r1, r2, r3 = st.columns(3)
-        with r1:
-            st.markdown('<div class="skill-card match-green"><b>✅ Matching Skills</b><br>Python, AI, Streamlit</div>', unsafe_allow_html=True)
-        with r2:
-            st.markdown('<div class="skill-card match-yellow"><b>⚠️ Partial Skills</b><br>Cloud Deployment, SQL</div>', unsafe_allow_html=True)
-        with r3:
-            st.markdown('<div class="skill-card match-red"><b>❌ Missing Skills</b><br>Docker, Kubernetes</div>', unsafe_allow_html=True)
-
-        st.balloons()
+                # 7. RESULTS DASHBOARD
+                st.markdown("---")
+                st.markdown("### Audit Findings")
+                
+                res_col_left, res_col_right = st.columns([1, 2])
+                
+                with res_col_left:
+                    st.markdown(f"""
+                        <div class="dashboard-card" style="text-align:center;">
+                            <p style="font-weight:600; color:#64748b;">Alignment Index</p>
+                            <div class="metric-circle">{score}%</div>
+                        </div>
+                    """, unsafe_allow_html=True)
+                
+                with res_col_right:
+                    st.markdown(f"""
+                        <div class="dashboard-card">
+                            <p style="font-weight:600; margin-bottom:10px;">Executive Summary</p>
+                            <p style="color:#334155; line-height:1.6;">{verdict}</p>
+                            <hr style="margin: 15px 0; border:0; border-top:1px solid #e2e8f0;">
+                            <div style="margin-bottom:12px;">
+                                <b style="font-size:0.9rem; color:#64748b;">CORE PROFICIENCIES IDENTIFIED:</b><br>
+                                <span class="status-badge badge-success">{matching}</span>
+                            </div>
+                            <div>
+                                <b style="font-size:0.9rem; color:#64748b;">IDENTIFIED TECHNICAL GAPS:</b><br>
+                                <span class="status-badge badge-danger">{missing}</span>
+                            </div>
+                        </div>
+                    """, unsafe_allow_html=True)
+                
+            except Exception as e:
+                st.error(f"Audit System Failure: {str(e)}")
+    else:
+        st.warning("Prerequisite missing: Please ensure both Candidate Profile and Target Specification are provided.")
