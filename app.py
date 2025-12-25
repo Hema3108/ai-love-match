@@ -19,16 +19,18 @@ st.markdown("""
         background: linear-gradient(135deg, #fce4ec 0%, #e1f5fe 100%) !important;
     }
 
-    /* Main Container Glassmorphism */
+    /* Main Container Glassmorphism (soft pastel pink variant) */
     .glass-card {
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(252, 238, 245, 0.95); /* very light pink */
         backdrop-filter: blur(10px);
-        border-radius: 30px;
-        padding: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        margin-bottom: 30px;
+        border-radius: 18px;
+        padding: 18px 28px;
+        border: 1px solid rgba(123, 31, 162, 0.12); /* soft purple border */
+        box-shadow: 0 8px 18px rgba(123, 31, 162, 0.06);
+        margin: 0 0 18px 0;
     }
+    /* Remove extra top spacing for the first glass card below the header */
+    .glass-card:first-of-type { margin-top: 0 !important; }
 
     /* Floating Heart Particles */
     @keyframes float {
@@ -54,22 +56,33 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        background: white;
+        background: #fffdfa; /* very light warm white */
         border-radius: 50%;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        border: 10px solid #ff4081;
+        box-shadow: 0 8px 18px rgba(123, 31, 162, 0.06);
+        border: 10px solid rgba(255,64,129,0.12); /* soft pink ring */
     }
-    .score-text { font-size: 3rem; font-weight: 800; color: #333; }
+    .score-text { font-size: 3rem; font-weight: 800; color: #7b1fa2; }
 
     /* Result Skill Cards */
     .skill-card {
-        padding: 20px;
-        border-radius: 15px;
-        background: white;
-        border-bottom: 5px solid #ccc;
-        margin-bottom: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        padding: 16px;
+        border-radius: 12px;
+        background: #ffffff; /* clean white for contrast */
+        border-bottom: 4px solid rgba(0,0,0,0.06);
+        margin-bottom: 14px;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        color: #333;
     }
+    /* Input boxes for uploader and job description */
+    .input-card {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(123,31,162,0.08);
+        box-shadow: 0 6px 12px rgba(123,31,162,0.03);
+    }
+    .input-left { background: rgba(255,246,250,0.95); /* very pale pink */ }
+    .input-right { background: rgba(237,245,255,0.95); /* very pale blue */ }
+    .input-card .stButton>button { margin-top: 8px; }
     .match-green { border-color: #4caf50; }
     .match-yellow { border-color: #ffeb3b; }
     .match-red { border-color: #f44336; }
@@ -103,11 +116,22 @@ for i in range(10):
     st.markdown(f'<div class="heart" style="left:{i*10}%; bottom:-10%; animation-delay:{i*0.5}s;">❤️</div>', unsafe_allow_html=True)
 
 # 5. HEADER
-st.markdown('<h1>💞 AI Love Match</h1>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; margin-top:-15px;">Find your dream job soulmate</p>', unsafe_allow_html=True)
+# Tweak header margins to remove the extra empty space below the title
+st.markdown(
+    '<div style="text-align:center; margin-bottom:0;">'
+    '<h1 style="margin:0; padding:0;">💞 AI Love Match</h1>'
+    '<p style="text-align:center; margin:4px 0 0 0;">Find your dream job soulmate</p>'
+    '</div>',
+    unsafe_allow_html=True
+)
 
 # 6. INPUT CARDS
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+# Add a small intro inside the first glass card so it doesn't appear empty
+st.markdown(
+    '<div class="glass-card">'
+    '<p style="text-align:center; margin:0 0 12px 0; color:#555;">Tell us about yourself — upload your resume or paste a job description to get started.</p>'
+    , unsafe_allow_html=True
+)
 c1, c2 = st.columns(2)
 with c1:
     st.subheader("Your Story")
